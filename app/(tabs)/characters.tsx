@@ -13,19 +13,22 @@ export default function TabTwoScreen() {
       <View style={styles.characterContainer}>
         <Image source={require('./img/BarbarianIcon.png')}  style={{width: 80, height: 80,}}/>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', flex: 1}}>
-          <View style={{flexDirection: 'column', paddingLeft: 10}}>
+          <View style={{flexDirection: 'column', paddingLeft: 10, width: "70%"}}>
             <Text>
-              Name
+              Gregory
+            </Text>
+            <Text numberOfLines={1} ellipsizeMode='tail'>
+              lv 5 barbarian
             </Text>
             <Text>
-              lv x class
+              Goblin
             </Text>
           </View>
           <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
             <Pressable
             style={styles.iconButton}
             >
-              <Text>
+              <Text style={{width: 40}}>
                 View
               </Text>
               <Entypo
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#4F46E5',
     padding: 5,
-    width: 65,
+    width: 75,
     justifyContent: 'space-between'
   }
 });
