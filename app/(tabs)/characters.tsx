@@ -1,32 +1,34 @@
 import Entypo from '@expo/vector-icons/Entypo';
 
+import { CharacterData } from '@/data/db';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
+
+import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function TabTwoScreen() {
-  return (
-    <SafeAreaView  style={styles.titleContainer}>
-      <Text style={styles.text}>
-        Character screen
-      </Text>
-      <View style={styles.characterContainer}>
-        <Image source={require('./img/BarbarianIcon.png')}  style={{width: 80, height: 80,}}/>
+  const charaterMap = CharacterData.map((cd) => {
+    const router = useRouter();
+    return(
+      <View style={styles.characterContainer} key={cd.id}>
+        <Image source={require("../../img/BarbarianIcon.png")}  style={{width: 80, height: 80,}}/>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', flex: 1}}>
           <View style={{flexDirection: 'column', paddingLeft: 10, width: "70%"}}>
             <Text>
-              Gregory
+              {cd.name}
             </Text>
             <Text numberOfLines={1} ellipsizeMode='tail'>
-              lv 5 barbarian
+              lv {cd.dndClass[0].lv + " " + cd.dndClass[0].name}
             </Text>
             <Text>
-              Goblin
+              {cd.race}
             </Text>
           </View>
           <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
             <Pressable
-            style={styles.iconButton}
+              style={styles.iconButton}
+              onPress={() => router.navigate("/")}
             >
               <Text style={{width: 40}}>
                 View
@@ -36,28 +38,40 @@ export default function TabTwoScreen() {
               name="open-book"
               />
             </Pressable>
-            <Pressable style={styles.iconButton}>
-              <Text>
-                Edit
-              </Text>
-              <Entypo
-              size={20}
-              name="edit"
-              />
-            </Pressable>
+              <Pressable 
+                style={styles.iconButton}
+                onPress={() => router.navigate("/character/edit1")}
+              >
+                <Text>
+                  Edit
+                </Text>
+                <Entypo
+                  size={20}
+                  name="edit"
+                />
+              </Pressable>
           </View>      
         </View>
       </View>
+    );
+  })
+
+  return (
+    <SafeAreaView  style={styles.titleContainer}>
+      <Text style={styles.text}>
+        Character screen
+      </Text>
+      {charaterMap}
       <Pressable
-            style={{marginTop: 5, padding: 2, width: 60, justifyContent: 'space-between', flexDirection: 'row' , backgroundColor: '#4F46E5'}}
-            >
-              <Text>
-                New
-              </Text>
-              <Entypo
-              size={20}
-              name="add-user"
-              />
+        style={{marginTop: 5, padding: 2, width: 60, justifyContent: 'space-between', flexDirection: 'row' , backgroundColor: '#4F46E5'}}
+      >
+        <Text>
+          New
+        </Text>
+        <Entypo
+          size={20}
+          name="add-user"
+        />
       </Pressable>
     </SafeAreaView>
   );
