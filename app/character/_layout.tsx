@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
+import EditHeader from '@/components/editHeader';
 import { HapticTab } from '@/components/haptic-tab';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -10,6 +11,8 @@ export default function CharacterLayout() {
   const colorScheme = useColorScheme();
 
   return (
+    <>
+    <EditHeader/>
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -43,7 +46,8 @@ export default function CharacterLayout() {
           title: '4',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="home" color={color} />,
         }}
-      />
+        />
     </Tabs>
+    </>
   );
 }

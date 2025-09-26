@@ -1,10 +1,39 @@
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabaseSync("dnd.db");
+
+
+db.execSync(`
+    CREATE TABLE IF NOT EXISTS character (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    race Text,
+    dndClass Text,
+    level INTEGER
+  );
+`);
+
+export function addCharacter(name: string, race: string, dndClass: string, level: number) {
+  db.execSync(
+  `INSERT INTO character (name, race, dndClass, level) VALUES ("${name}", "${race}", "${dndClass}", ${level});`
+);
+}
+export async function getCharacters(): Promise<Character[]>{
+
+    const allRows = await db.getAllAsync("SELECT * FROM character");
+    for (const row of allRows) {
+        console.log(row);
+
+    }
+    return allRows as Character[]
+}
+
 export interface Character{
     id: number,
     name: string,
     race: string, //temp
-    stats: string, //temp
-    background: string, //temp
-    dndClass: DndClass[],
+    dndClass: string,
+    level: number
 }
 
 export interface DndClass {
@@ -15,7 +44,7 @@ export interface DndClass {
     url: string,
     img: string,
 };
-
+/*
 export const CharacterData : Character[] =  [
     {
         id: 1,
@@ -86,4 +115,4 @@ export const CharacterData : Character[] =  [
         ]
     }
 ]
-    
+*/    

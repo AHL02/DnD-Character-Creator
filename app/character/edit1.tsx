@@ -29,9 +29,6 @@ export default function EditPage1() {
   if (status === "error") return <Text>Error: {error?.message}</Text>;
   return(
     <SafeAreaView style={styles.titleContainer}>
-      <Text style={styles.text}>
-        Edit
-      </Text>
       <TextInput
         value={name}
         style={styles.input}

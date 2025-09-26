@@ -1,15 +1,26 @@
+import { Character, getCharacters } from '@/data/db';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 
-import { CharacterData } from '@/data/db';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 
-import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function TabTwoScreen() {
-  const charaterMap = CharacterData.map((cd) => {
-    const router = useRouter();
+  const [characters, setCharacters] = useState<Character[]>([]);
+
+  // Load data once when component mounts
+  useEffect(() => {
+    (async () => {
+      const data = await getCharacters();
+      setCharacters(data);
+    })();
+  }, []);
+console.log(characters)
+  const router = useRouter();
+  const charaterMap =  characters.map((cd) => {
     return(
       <View style={styles.characterContainer} key={cd.id}>
         <Image source={require("../../img/BarbarianIcon.png")}  style={{width: 80, height: 80,}}/>
@@ -19,7 +30,7 @@ export default function TabTwoScreen() {
               {cd.name}
             </Text>
             <Text numberOfLines={1} ellipsizeMode='tail'>
-              lv {cd.dndClass[0].lv + " " + cd.dndClass[0].name}
+              lv {cd.level + " " + cd.dndClass}
             </Text>
             <Text>
               {cd.race}

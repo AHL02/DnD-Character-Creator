@@ -1,3 +1,4 @@
+import ClassDetails from "@/components/classDetails";
 import { DndListResponse, ListItem } from "@/data/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -21,14 +22,12 @@ export default function EditPage2() {
     const [value, setValue] = useState("");
     const [openLv, setOpenLv] = useState(false);
     const [lv, setLv] = useState(1);
+    
 
     if (status === "pending") return <Text>Loading classes...</Text>;
     if (status === "error") return <Text>Error: {error?.message}</Text>;
     return(
       <SafeAreaView style={styles.titleContainer}>
-        <Text style={styles.text}>
-          Edit
-        </Text>
         <View style={{flexDirection: "row"}}>
           <DropDownPicker
               open={open}
@@ -57,7 +56,8 @@ export default function EditPage2() {
               zIndex={1000}
                   zIndexInverse={2000}
             />
-          </View>
+        </View> 
+       <ClassDetails value={value} lv={lv} />
       </SafeAreaView>
     );
 };

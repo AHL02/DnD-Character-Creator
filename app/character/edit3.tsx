@@ -1,12 +1,8 @@
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 
 export default function EditPage3() {
     return(
-        <ScrollView style={styles.titleContainer}>
-            <Text style={styles.text}>
-              Edit
-            </Text>
-        </ScrollView>
+""
     );
 };
 

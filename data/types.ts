@@ -113,3 +113,39 @@ export type DndClassDetails = {
   url: string;
   class_levels: ClassLevel[];
 };
+
+
+export interface SpellcastingLevelInfo {
+  cantrips_known?: number;
+  spells_known?: number;
+  spell_slots_level_1?: number;
+  spell_slots_level_2?: number;
+  spell_slots_level_3?: number;
+  spell_slots_level_4?: number;
+  spell_slots_level_5?: number;
+  spell_slots_level_6?: number;
+  spell_slots_level_7?: number;
+  spell_slots_level_8?: number;
+  spell_slots_level_9?: number;
+}
+
+export interface ClassLevelResource {
+  index?: string;
+  url?: string;
+  level?: number;
+  ability_score_bonuses?: number;
+  prof_bonus?: number;
+  features?: APIReference[];
+  spellcasting?: SpellcastingLevelInfo;
+  class_specific?: Record<string, any>;  // for class-specific fields (e.g. “bard songs”, etc.)
+  updated_at?: string;
+}
+
+export interface feature{
+  level: number;
+  index: string;
+  name: string;
+  url: string;
+}
+
+export type ClassLevelsResponse = ClassLevelResource[]
