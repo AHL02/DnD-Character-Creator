@@ -34,6 +34,11 @@ export async function getCharacters(): Promise<Character[]>{
     }
     return allRows as Character[]
 }
+export async function DeleteCharacter(id: number) {
+            db.execSync(
+            `DELETE FROM character WHERE id = ${id}`
+            )
+}
 
 export interface Character{
     id: number,

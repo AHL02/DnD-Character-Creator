@@ -1,10 +1,10 @@
 import { CharacterAtom } from '@/data/atoms';
-import { Character, getCharacters } from '@/data/db';
+import { Character, DeleteCharacter, getCharacters } from '@/data/db';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 
 import { useAtom } from 'jotai';
@@ -50,7 +50,7 @@ export default function TabTwoScreen() {
       <View style={styles.characterContainer} key={cd.id}>
         <Image source={require("../../img/BarbarianIcon.png")}  style={{width: 80, height: 80,}}/>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', flex: 1}}>
-          <View style={{flexDirection: 'column', paddingLeft: 10, width: "70%"}}>
+          <View style={{flexDirection: 'column', paddingLeft: 10, width: "60%"}}>
             <Text>
               {cd.name}
             </Text>
@@ -85,7 +85,15 @@ export default function TabTwoScreen() {
                   name="edit"
                 />
               </Pressable>
-          </View>      
+          </View>   
+             <Pressable 
+               style={{marginTop: 5, padding: 2, width: 20, height: 25 , backgroundColor: '#c00b0bff'}}
+                onPress={() => DeleteCharacter(cd.id)}
+              >
+                <Text>
+                  X
+                </Text>
+              </Pressable>
         </View>
       </View>
     );
@@ -96,19 +104,21 @@ export default function TabTwoScreen() {
       <Text style={styles.text}>
         Character screen
       </Text>
-      {charaterMap}
-      <Pressable
-        style={{marginTop: 5, padding: 2, width: 60, justifyContent: 'space-between', flexDirection: 'row' , backgroundColor: '#4F46E5'}}
-        onPress={ () => newScreen()}
-      >
-        <Text>
-          New
-        </Text>
-        <Entypo
-          size={20}
-          name="add-user"
-        />
-      </Pressable>
+      <ScrollView>
+        {charaterMap}
+        <Pressable
+          style={{marginTop: 5, padding: 2, width: 60, justifyContent: 'space-between', flexDirection: 'row' , backgroundColor: '#4F46E5'}}
+          onPress={ () => newScreen()}
+        >
+          <Text>
+            New
+          </Text>
+          <Entypo
+            size={20}
+            name="add-user"
+          />
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 }
