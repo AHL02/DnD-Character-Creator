@@ -1,6 +1,8 @@
 import ClassDetails from "@/components/classDetails";
+import { CharacterAtom } from "@/data/atoms";
 import { DndListResponse, ListItem } from "@/data/types";
 import { useQuery } from "@tanstack/react-query";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -17,12 +19,9 @@ export default function EditPage2() {
       return await response.json()
     },
   });
-
+    const [character, setCharacter] = useAtom(CharacterAtom)
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("");
     const [openLv, setOpenLv] = useState(false);
-    const [lv, setLv] = useState(1);
-    
 
     if (status === "pending") return <Text>Loading classes...</Text>;
     if (status === "error") return <Text>Error: {error?.message}</Text>;
@@ -31,33 +30,43 @@ export default function EditPage2() {
         <View style={{flexDirection: "row"}}>
           <DropDownPicker
               open={open}
-              value={value}
+              value={character.class}
               items={data!.results.map((cls: ListItem) => ({
                 label: cls.name,   // shows up in dropdown
                 value: cls.index,  // internal value you can use
               }))}
               setOpen={setOpen}
-              setValue={setValue}
+              setValue={(callback) => {
+                setCharacter((prev) => ({
+                  ...prev,
+                  class: typeof callback === "function" ? callback(prev.class) : callback,
+                }));
+              }}
                   containerStyle={{ flex: 0.8 }}
               zIndex={2000}
                   zIndexInverse={2000}
             />
             <DropDownPicker
               open={openLv}
-              value={lv}
+              value={character.lv}
               items={Array.from({length: 20} , (_,i) => i+ 1).map((num: number) => ({
                 label: num.toString(),
                 value: num,
               }))}
               setOpen={setOpenLv}
-              setValue={setLv}
+              setValue={(callback) => {
+                setCharacter((prev) => ({
+                  ...prev,
+                  lv: typeof callback === "function" ? callback(prev.lv) : callback,
+                }));
+              }}
 
                   containerStyle={{ flex: 0.2 }}
               zIndex={1000}
                   zIndexInverse={2000}
             />
         </View> 
-       <ClassDetails value={value} lv={lv} />
+       <ClassDetails value={character.class} lv={character.lv} />
       </SafeAreaView>
     );
 };

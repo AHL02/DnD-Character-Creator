@@ -1,6 +1,8 @@
 import RaceDetails from "@/components/raceDetails";
+import { CharacterAtom } from "@/data/atoms";
 import { DndListResponse, ListItem } from "@/data/types";
 import { useQuery } from "@tanstack/react-query";
+import { useAtom } from "jotai";
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -19,8 +21,8 @@ export default function EditPage1() {
       return await response.json()
     },
   });
-
-  const [name, onChangeText] = useState();
+  
+  const [character, setCharacter] = useAtom(CharacterAtom)
   const [description, setDescription] = useState();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -30,21 +32,27 @@ export default function EditPage1() {
   return(
     <SafeAreaView style={styles.titleContainer}>
       <TextInput
-        value={name}
+        value={character.name}
         style={styles.input}
         placeholder="Name"
+        onChangeText={(text) => setCharacter((prev) => ({ ...prev, name: text}))}
       />
-      <DropDownPicker
+     <DropDownPicker
         open={open}
-        value={value}
-        items={data!.results.map((cls: ListItem) => ({
-          label: cls.name,   // shows up in dropdown
-          value: cls.index,  // internal value you can use
+        value={character.race}
+        items={data!.results.map((race: ListItem) => ({
+          label: race.name,
+          value: race.index,
         }))}
         setOpen={setOpen}
-        setValue={setValue}
+        setValue={(callback) => {
+          setCharacter((prev) => ({
+            ...prev,
+            race: typeof callback === "function" ? callback(prev.race) : callback,
+          }));
+        }}
       />
-      <RaceDetails value={value}></RaceDetails> 
+      <RaceDetails value={character.race}></RaceDetails> 
     </SafeAreaView>
   );
 };

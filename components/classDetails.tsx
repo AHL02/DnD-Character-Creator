@@ -60,7 +60,7 @@ const ClassDetails: React.FC<Props> = ({ value, lv }) => {
   <View style={{flex: 1}}>
      <Pressable onPress={() => setExpand(!expand)} style={styles.iconButton}>
         <Text>
-          {expand?  "Levels" : "class" }
+          {expand? "class" : "Levels" }
         </Text>
       </Pressable> 
             

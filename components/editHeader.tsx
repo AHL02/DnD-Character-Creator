@@ -1,11 +1,15 @@
+import { CharacterAtom } from "@/data/atoms";
+import { addCharacter } from "@/data/db";
 import Entypo from "@expo/vector-icons/Entypo";
 import { router } from "expo-router";
+import { useAtomValue } from "jotai";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function EditHeader(){
 
+   const character = useAtomValue(CharacterAtom)
     function SaveAndExit() {
-        
+      addCharacter(character.id, character.name, character.race, character.class, character.lv )
         router.navigate("/")
     }
   return(

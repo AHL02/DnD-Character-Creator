@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useAudioPlayer } from 'expo-audio';
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -13,6 +14,10 @@ export const unstable_settings = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const queryClient = new QueryClient();
+
+  const player = useAudioPlayer( require("../music/Music.mp3"));
+  player.loop = true;
+  player.play();
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -1,15 +1,18 @@
+import { CharacterAtom } from '@/data/atoms';
 import { Character, getCharacters } from '@/data/db';
 import Entypo from '@expo/vector-icons/Entypo';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-
+import { useAtom } from 'jotai';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function TabTwoScreen() {
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [character, setCharacter] = useAtom(CharacterAtom)
 
   // Load data once when component mounts
   useEffect(() => {
@@ -18,8 +21,30 @@ export default function TabTwoScreen() {
       setCharacters(data);
     })();
   }, []);
-console.log(characters)
   const router = useRouter();
+  function editScreen(dndcharacter: Character) {
+
+    setCharacter(() => ({
+      id: dndcharacter.id,
+      name: dndcharacter.name,
+      race: dndcharacter.race,
+      class: dndcharacter.dndClass,
+      lv: dndcharacter.level,
+    }));
+    router.navigate("/character/edit1");
+  }
+
+   function newScreen() {
+    setCharacter(() => ({
+      id: 0,
+      name: "",
+      race: "",
+      class: "",
+      lv: 1,
+    }));
+    router.navigate("/character/edit1");
+  }
+
   const charaterMap =  characters.map((cd) => {
     return(
       <View style={styles.characterContainer} key={cd.id}>
@@ -39,7 +64,6 @@ console.log(characters)
           <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
             <Pressable
               style={styles.iconButton}
-              onPress={() => router.navigate("/")}
             >
               <Text style={{width: 40}}>
                 View
@@ -51,7 +75,7 @@ console.log(characters)
             </Pressable>
               <Pressable 
                 style={styles.iconButton}
-                onPress={() => router.navigate("/character/edit1")}
+                onPress={() => editScreen(cd)}
               >
                 <Text>
                   Edit
@@ -75,6 +99,7 @@ console.log(characters)
       {charaterMap}
       <Pressable
         style={{marginTop: 5, padding: 2, width: 60, justifyContent: 'space-between', flexDirection: 'row' , backgroundColor: '#4F46E5'}}
+        onPress={ () => newScreen()}
       >
         <Text>
           New

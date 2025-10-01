@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
@@ -7,12 +7,6 @@ export default function HomeScreen() {
       <Text style={styles.text}>
         Hello World!
       </Text>
-      <Button
-      title='Character List'
-      />
-      <Button
-      title='Compendium'
-      />
     </SafeAreaView>
   );
 }

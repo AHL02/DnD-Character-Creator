@@ -2,7 +2,6 @@ import * as SQLite from "expo-sqlite";
 
 const db = SQLite.openDatabaseSync("dnd.db");
 
-
 db.execSync(`
     CREATE TABLE IF NOT EXISTS character (
     id INTEGER PRIMARY KEY,
@@ -13,16 +12,24 @@ db.execSync(`
   );
 `);
 
-export function addCharacter(name: string, race: string, dndClass: string, level: number) {
-  db.execSync(
-  `INSERT INTO character (name, race, dndClass, level) VALUES ("${name}", "${race}", "${dndClass}", ${level});`
-);
+export function addCharacter(id: number, name: string, race: string, dndClass: string, level: number) {
+    if(id == 0){
+
+        db.execSync(
+            `INSERT INTO character (name, race, dndClass, level) VALUES ("${name}", "${race}", "${dndClass}", ${level});`
+        );
+    }
+    else{
+
+        db.execSync(
+            `UPDATE character SET name = "${name}", race = "${race}", dndClass = "${dndClass}", level = ${level} WHERE id = ${id};`
+        );
+    }
 }
 export async function getCharacters(): Promise<Character[]>{
 
     const allRows = await db.getAllAsync("SELECT * FROM character");
     for (const row of allRows) {
-        console.log(row);
 
     }
     return allRows as Character[]
