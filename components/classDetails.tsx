@@ -55,9 +55,8 @@ const ClassDetails: React.FC<Props> = ({ value, lv }) => {
       ...f,
       level: lvl.level,
     }))) as feature[];
-  console.log(features)
   return ( 
-  <View style={{flex: 1}}>
+    <View style={{flex: 1}}>
      <Pressable onPress={() => setExpand(!expand)} style={styles.iconButton}>
         <Text>
           {expand? "class" : "Levels" }
@@ -70,7 +69,7 @@ const ClassDetails: React.FC<Props> = ({ value, lv }) => {
       <View style={{flex: expand ? 1 : 0}}>
         <ClassLvCard dndClass={data} level={lvData.data[lv -1]} features={features}/>
       </View>
-  </View>
+    </View>
   );
 };
 

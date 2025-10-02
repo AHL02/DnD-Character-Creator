@@ -24,7 +24,6 @@ const RaceDetails: React.FC<Props> = ({ value }) => {
     enabled: !!value, // only fetch if value is defined
   });
 
-  console.log(value, data)
 
   
   if (isLoading) return <ActivityIndicator size="large" />;

@@ -10,9 +10,8 @@ interface ClassCardProps {
 }
 
 export const ClassLvCard: React.FC<ClassCardProps> = ({ dndClass, level, features }) => {
-  console.log(level)
   return (
-        <ScrollView style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>
         {dndClass.name} - Level {level.level}
       </Text>
@@ -52,7 +51,7 @@ export const ClassLvCard: React.FC<ClassCardProps> = ({ dndClass, level, feature
           lv {f.level} {f.name}
         </Text>
       )) : ""}
-      </ScrollView>
+    </ScrollView>
   );
 };
 
