@@ -1,4 +1,4 @@
-# 🏛️ Gladiator App
+# 🏛️ DnD Character Creator
 
 En mobilapp byggd med **React Native** och **Expo** som låter användaren skapa DnD5e character sheets
 
