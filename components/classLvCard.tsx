@@ -11,7 +11,7 @@ interface ClassCardProps {
 
 export const ClassLvCard: React.FC<ClassCardProps> = ({ dndClass, level, features }) => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
       <Text style={styles.title}>
         {dndClass.name} - Level {level.level}
       </Text>
@@ -56,29 +56,27 @@ export const ClassLvCard: React.FC<ClassCardProps> = ({ dndClass, level, feature
 };
 
 const styles = StyleSheet.create({
-  container: {
+ container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: "#1e1e1e",
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 12,
+    color: "#ffffff", 
   },
   section: {
     fontSize: 20,
     marginTop: 12,
     fontWeight: "600",
+    color: "#9b30ff",
   },
   item: {
     fontSize: 16,
     marginLeft: 8,
     marginTop: 4,
-  },
-  footer: {
-    fontSize: 12,
-    color: "gray",
-    marginTop: 20,
+    color: "#bbbbbb", 
   },
 });

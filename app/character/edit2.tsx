@@ -42,9 +42,12 @@ export default function EditPage2() {
                   class: typeof callback === "function" ? callback(prev.class) : callback,
                 }));
               }}
-                  containerStyle={{ flex: 0.8 }}
+              style={styles.input}
+              textStyle={{ color: "#ffffff" }}
+              dropDownContainerStyle={styles.dropDownContainer}
+              containerStyle={{ flex: 0.78 }}
               zIndex={2000}
-                  zIndexInverse={2000}
+              zIndexInverse={2000}
             />
             <DropDownPicker
               open={openLv}
@@ -60,10 +63,12 @@ export default function EditPage2() {
                   lv: typeof callback === "function" ? callback(prev.lv) : callback,
                 }));
               }}
-
-                  containerStyle={{ flex: 0.2 }}
+              style={styles.input}
+              textStyle={{ color: "#ffffff" }}
+              dropDownContainerStyle={styles.dropDownContainer}
+              containerStyle={{ flex: 0.22 }}
               zIndex={1000}
-                  zIndexInverse={2000}
+              zIndexInverse={2000}
             />
         </View> 
        <ClassDetails value={character.class} lv={character.lv} />
@@ -73,14 +78,39 @@ export default function EditPage2() {
 
 
 const styles = StyleSheet.create({
-  titleContainer: {
+ titleContainer: {
     flex: 1,
-    
+    padding: 16,
+    backgroundColor: "#1e1e1e",
   },
-  text:{
-    color: '#D0D0D0',
+  text: {
+    color: "#ffffff", 
     fontSize: 40,
-    backgroundColor: '#b40087ff',
-    textAlign: 'center'
+    textAlign: "center",
+    marginBottom: 12,
+  },
+  infoText: {
+    color: "#cccccc",
+    fontSize: 12,
+    textAlign: "center",
+    marginBottom: 8,
+  },
+  input: {
+    height: 40,
+    marginVertical: 12,
+    marginHorizontal: 0,
+    borderWidth: 1,
+    borderColor: "#9b30ff",
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#272727", 
+    color: "#ffffff",
+  },
+  dropDownContainer: {
+    marginVertical: 8,
+    backgroundColor: "#272727", 
+  },
+  dropDownLabel: {
+    color: "#ffffff",
   },
 });

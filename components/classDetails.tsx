@@ -56,32 +56,44 @@ const ClassDetails: React.FC<Props> = ({ value, lv }) => {
       level: lvl.level,
     }))) as feature[];
   return ( 
-    <View style={{flex: 1}}>
-     <Pressable onPress={() => setExpand(!expand)} style={styles.iconButton}>
-        <Text>
-          {expand? "class" : "Levels" }
+    <View style={{ flex: 1 }}>
+
+      <Pressable onPress={() => setExpand(!expand)} style={styles.iconButton}>
+        <Text style={styles.buttonText}>
+          {expand ? "Class" : "Levels"}
         </Text>
-      </Pressable> 
-            
-      <View style={{flex: expand ? 0 : 1}}>
+      </Pressable>
+
+      {expand ? (
+        <ClassLvCard
+          dndClass={data}
+          level={lvData.data[lv - 1]}
+          features={features}
+        />
+      ) : (
         <ClassCard dndClass={data} />
-      </View>
-      <View style={{flex: expand ? 1 : 0}}>
-        <ClassLvCard dndClass={data} level={lvData.data[lv -1]} features={features}/>
-      </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    iconButton:{
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#4F46E5',
-    padding: 5,
-    width: 75,
-    justifyContent: 'space-between'
-  }
+  iconButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#9b30ff", // purple accent for dark theme
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    marginVertical: 10,
+    alignSelf: "flex-start", // keeps the button aligned left
+  },
+  buttonText: {
+    color: "#ffffff", // white text for contrast
+    fontSize: 16,
+    fontWeight: "600",
+  },
 });
 
 export default ClassDetails;

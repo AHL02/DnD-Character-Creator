@@ -7,7 +7,7 @@ interface RaceCardProps {
 
 export const RaceCard: React.FC<RaceCardProps> = ({ race }) => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
       <Text style={styles.title}>{race.name}</Text>
       <Text style={styles.section}>Speed: {race.speed}</Text>
 
@@ -61,8 +61,6 @@ export const RaceCard: React.FC<RaceCardProps> = ({ race }) => {
       ) : (
         <Text style={styles.item}>None</Text>
       )}
-
-      <Text style={styles.footer}>Updated: {race.updated_at}</Text>
     </ScrollView>
   );
 };
@@ -71,26 +69,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: "#1e1e1e", // slightly deeper dark
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 12,
+    color: "#ffffff", 
   },
   section: {
     fontSize: 20,
     marginTop: 12,
     fontWeight: "600",
+    color: "#9b30ff", // brighter purple accent
   },
   item: {
     fontSize: 16,
     marginLeft: 8,
     marginTop: 4,
-  },
-  footer: {
-    fontSize: 12,
-    color: "gray",
-    marginTop: 20,
+    color: "#bbbbbb", 
   },
 });

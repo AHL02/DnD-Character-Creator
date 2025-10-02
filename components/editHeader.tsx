@@ -12,44 +12,46 @@ export default function EditHeader(){
       addCharacter(character.id, character.name, character.race, character.class, character.lv )
         router.navigate("/")
     }
-  return(
-    <View style={styles.titleContainer}>
-      <Text style={styles.text}>
-        Edit
-      </Text>
-      <Pressable 
-      style={{margin: 5, padding: 2, width: 60, flexDirection: 'row' , backgroundColor: '#4F46E5'}}
-      onPress={SaveAndExit}
-        >
-        <Text style={{fontSize: 20}}> Save</Text>
-        <Entypo
-          size={20}
-          name="save"
-        />
-      </Pressable>
-    </View>
-  );
+ return (
+  <View style={styles.titleContainer}>
+    <Text style={styles.text}>Edit</Text>
+    <Pressable style={styles.iconButton} onPress={SaveAndExit}>
+      <Text style={styles.buttonText}>Save</Text>
+      <Entypo size={20} name="save" color="#ffffff" />
+    </Pressable>
+  </View>
+);
 }
+
 const styles = StyleSheet.create({
   titleContainer: {
     flex: 0.1,
     flexDirection: "row",
-      backgroundColor: '#b40087ff',
+    backgroundColor: "#1e1e2a", // dark background
+    alignItems: "center",
+    paddingHorizontal: 12,
   },
-  text:{
-    color: '#D0D0D0',
+  text: {
+    color: "#ffffff", // light text
     fontSize: 40,
-  
-    textAlign: 'center',
-    flex: 0.8
+    textAlign: "center",
+    flex: 0.8,
   },
-    iconButton:{
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#4F46E5',
-    padding: 5,
-    justifyContent: 'space-between',
+  iconButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#9b30ff", // accent purple
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 8,
     flex: 0.2,
-    margin: 8
-  }
+    marginLeft: 8,
+  },
+  buttonText: {
+    color: "#ffffff",
+    fontSize: 18,
+    marginRight: 6,
+    width: 45
+  },
 });

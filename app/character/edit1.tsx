@@ -30,11 +30,12 @@ export default function EditPage1() {
   if (status === "pending") return <Text>Loading classes...</Text>;
   if (status === "error") return <Text>Error: {error?.message}</Text>;
   return(
-    <SafeAreaView style={styles.titleContainer}>
+    <SafeAreaView style={styles.container}>
       <TextInput
         value={character.name}
         style={styles.input}
         placeholder="Name"
+        placeholderTextColor="#ffffff"
         onChangeText={(text) => setCharacter((prev) => ({ ...prev, name: text}))}
       />
      <DropDownPicker
@@ -51,6 +52,9 @@ export default function EditPage1() {
             race: typeof callback === "function" ? callback(prev.race) : callback,
           }));
         }}
+          style={styles.input}
+          textStyle={{ color: "#ffffff" }}
+          dropDownContainerStyle={styles.dropDownContainer}
       />
       <RaceDetails value={character.race}></RaceDetails> 
     </SafeAreaView>
@@ -59,27 +63,39 @@ export default function EditPage1() {
 
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
     flex: 1,
-    
+    padding: 16,
+    backgroundColor: "#1e1e1e",
   },
-  text:{
-    color: '#D0D0D0',
+  text: {
+    color: "#ffffff",
     fontSize: 40,
-    backgroundColor: '#b40087ff',
-    textAlign: 'center'
+    textAlign: "center",
+    marginBottom: 12,
   },
-  infoText:{
-        color: '#D0D0D0',
+  infoText: {
+    color: "#cccccc",
     fontSize: 12,
-    backgroundColor: '#ae6301ff',
-    textAlign: 'center'
+    textAlign: "center",
+    marginBottom: 8,
   },
-    input: {
+  input: {
     height: 40,
-    margin: 12,
+    marginVertical: 12,
+    marginHorizontal: 0,
     borderWidth: 1,
+    borderColor: "#9b30ff", 
     padding: 10,
-     backgroundColor: '#ae6301ff',
+    borderRadius: 8,
+    backgroundColor: "#272727", 
+    color: "#ffffff",
+  },
+  dropDownContainer: {
+    marginVertical: 8,
+    backgroundColor: "#272727",
+  },
+  dropDownLabel: {
+    color: "#ffffff",
   },
 });

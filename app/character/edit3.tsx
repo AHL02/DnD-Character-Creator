@@ -8,7 +8,7 @@ export default function EditPage3() {
     setvalues
   }
     return(
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <View style={{flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", marginBottom: 10 }}>
           <View style={styles.box}>
             <Text style={styles.title}>
@@ -132,34 +132,44 @@ export default function EditPage3() {
 
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#1e1e1e", 
+  },
   box: {
-    backgroundColor: "#f0f0f0", // light gray background
+    backgroundColor: "#272727", 
     padding: 16,
     borderRadius: 10,
     alignItems: "center",
-    width: 140, // adjust as needed
+    width: 140,
     margin: 8,
+    borderWidth: 1,
+    borderColor: "#9b30ff",
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
+    color: "#ffffff",
   },
   input: {
     width: "80%",
     height: 40,
-    borderColor: "#ccc",
+    borderColor: "#9b30ff",
     borderWidth: 1,
     borderRadius: 6,
     paddingHorizontal: 8,
     fontSize: 16,
     marginBottom: 8,
     textAlign: "center",
+    color: "#ffffff", 
+    backgroundColor: "#1e1e1e",
   },
   subText: {
     width: 100,
     fontSize: 14,
-    color: "#555",
+    color: "#cccccc",
     marginVertical: 2,
     textAlign: "center",
   },
